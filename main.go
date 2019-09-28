@@ -1,9 +1,10 @@
 package main
 
-import(
+import (
 	"fmt"
-	"github.com/go-redis/redis"
 	"log"
+
+	"github.com/go-redis/redis"
 )
 
 //CreateConnection test connection with redis server
@@ -22,8 +23,8 @@ func CreateConnection() *redis.Client {
 	return client
 }
 
-//SetValue set key
-func SetValue(client *redis.Client, key,value string){
+//SetValue sets key
+func SetValue(client *redis.Client, key, value string) {
 	err := client.Set(key, value, 0).Err()
 	if err != nil {
 		panic(err)
@@ -31,7 +32,7 @@ func SetValue(client *redis.Client, key,value string){
 	fmt.Println("Key Set Done!")
 }
 
-//GetValue get key
+//GetValue gets key
 func GetValue(client *redis.Client, key string) string {
 	val, err := client.Get(key).Result()
 	if err != nil {
@@ -42,17 +43,17 @@ func GetValue(client *redis.Client, key string) string {
 	return val
 }
 
-func main(){
- fmt.Println("Declare key and value")
- var key,value string = "a","apple" 
+func main() {
+	fmt.Println("Declare key and value")
+	var key, value string = "a", "apple"
 
- fmt.Println("Start Connection Test")
- connection := CreateConnection()
+	fmt.Println("Start Connection Test")
+	connection := CreateConnection()
 
- fmt.Println("Set key and value")
- SetValue(connection,key,value)
+	fmt.Println("Set key and value")
+	SetValue(connection, key, value)
 
- fmt.Println("Get value")
- GetValue(connection,key)
- 
+	fmt.Println("Get value")
+	GetValue(connection, key)
+
 }
